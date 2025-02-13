@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Heart, ArrowRight, Facebook, Twitter, Linkedin } from "lucide-react"
+import { Heart, ArrowRight, Facebook, Twitter, Linkedin, MessageCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import Confetti from "@/components/confetti"
@@ -52,6 +52,7 @@ export default function CupidonReactif() {
       window.open(whatsappUrl, "_blank")
     }
   }
+
   const calculateCompatibility = (e: React.FormEvent) => {
     e.preventDefault()
     setShowForm(false)
@@ -77,7 +78,7 @@ export default function CupidonReactif() {
           onClick={() => setShowForm(true)}
           className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full shadow-lg text-sm md:text-base"
         >
-          Lâchez votre flèche d&apos;amour !
+          Lâchez votre flèche d'amour !
         </Button>
       )}
 
@@ -151,24 +152,30 @@ export default function CupidonReactif() {
                 : `Votre taux d'amour est de ${loveScore}% !`}
             </p>
             <p className="text-lg md:text-xl text-pink-500 mb-6">Cupidon a frappé !</p>
-            <div className="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
               <Button
                 onClick={() => shareScore("facebook")}
-                className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full shadow-lg flex items-center text-sm md:text-base"
+                className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full shadow-lg flex items-center justify-center text-sm"
               >
-                <Facebook className="mr-2" /> Partager sur Facebook
+                <Facebook className="mr-2" /> Facebook
               </Button>
               <Button
                 onClick={() => shareScore("twitter")}
-                className="bg-sky-500 hover:bg-sky-600 text-white font-bold py-2 px-4 rounded-full shadow-lg flex items-center text-sm md:text-base"
+                className="bg-sky-500 hover:bg-sky-600 text-white font-bold py-2 px-4 rounded-full shadow-lg flex items-center justify-center text-sm"
               >
-                <Twitter className="mr-2" /> Partager sur Twitter
+                <Twitter className="mr-2" /> Twitter
               </Button>
               <Button
                 onClick={() => shareScore("linkedin")}
-                className="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-full shadow-lg flex items-center text-sm md:text-base"
+                className="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-full shadow-lg flex items-center justify-center text-sm"
               >
-                <Linkedin className="mr-2" /> Partager sur LinkedIn
+                <Linkedin className="mr-2" /> LinkedIn
+              </Button>
+              <Button
+                onClick={() => shareScore("whatsapp")}
+                className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full shadow-lg flex items-center justify-center text-sm"
+              >
+                <MessageCircle className="mr-2" /> WhatsApp
               </Button>
             </div>
           </motion.div>
