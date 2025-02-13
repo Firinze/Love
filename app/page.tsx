@@ -25,22 +25,33 @@ export default function CupidonReactif() {
     }, 2000)
   }
 
-  const shareScore = (platform: "facebook" | "twitter" | "linkedin") => {
+  const shareScore = (platform: "facebook" | "twitter" | "linkedin" | "whatsapp") => {
     const message = `J'ai obtenu un score d'amour de ${loveScore}% sur Cupidon Réactif ! 💘`
-    const url = encodeURIComponent("https://cupidon-reactif.vercel.app") // Replace with your actual URL
+    const url = "https://cupidon-reactif.vercel.app" // Replace with your actual URL
 
-    let shareUrl = ""
     if (platform === "facebook") {
-      shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${encodeURIComponent(message)}`
+      // @ts-ignore
+      if (window.FB) {
+        // @ts-ignore
+        window.FB.ui({
+          method: "share",
+          href: url,
+          quote: message,
+        })
+      } else {
+        console.error("Facebook SDK not loaded")
+      }
     } else if (platform === "twitter") {
-      shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(message)}&url=${url}`
+      const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(message)}&url=${encodeURIComponent(url)}`
+      window.open(twitterUrl, "_blank")
     } else if (platform === "linkedin") {
-      shareUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${url}&title=${encodeURIComponent("Cupidon Réactif")}&summary=${encodeURIComponent(message)}`
+      const linkedinUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(url)}&title=${encodeURIComponent("Cupidon Réactif")}&summary=${encodeURIComponent(message)}`
+      window.open(linkedinUrl, "_blank")
+    } else if (platform === "whatsapp") {
+      const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message + " " + url)}`
+      window.open(whatsappUrl, "_blank")
     }
-
-    window.open(shareUrl, "_blank")
   }
-
   const calculateCompatibility = (e: React.FormEvent) => {
     e.preventDefault()
     setShowForm(false)
